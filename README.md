@@ -146,7 +146,48 @@ public class MyProcessEngineConfigurationCustomizer implements ProcessEngineConf
     }
 
 }
-```    
+```
+
+## Transactions management support
+
+For the above configuration, with explicitely configured datasource details, the process engine built by this integration will use standalone datasource with Camunda-based transactions management, what means the separate database connection with transactions opened and closed on each call to the camunda service method.
+
+However, it is possible to integrate both datasource and transactions management closer with [micronaut-sql](https://micronaut-projects.github.io/micronaut-sql/latest/guide) and built-in Micronaut transaction managers.
+
+To enable embedded transactions management support please add the following dependencies to your project:
+
+```
+implementation("io.micronaut.data:micronaut-data-tx")
+runtime("io.micronaut.sql:micronaut-jdbc-hikari")
+```
+
+And then configure JDBC properties as described in [micronaut-sql documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jdbc).
+
+The example above uses plain JDBC datasource, while the alternative is to use JPA/Hibernate with the following dependencies:
+
+```
+implementation("io.micronaut.sql:micronaut-hibernate-jpa")
+runtime("io.micronaut.sql:micronaut-jdbc-hikari")
+```
+
+And then JPA configuration as desrcibed in [micronaut-sql documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/#hibernate).
+
+With such a configuration transactions management will be accomplished by Micronaut container, not by Camunda, and to work with Camunda beans `@TransactionalAdvice` is required, which sets up transaction boundaries. For example:
+
+```java
+class MyBean {
+
+    @Inject RuntimeService runtimeService;
+
+    @TransactionalAdvice
+    public void startProcess(String processDefinitionId) {
+        runtimeService.startProcessInstanceById(processDefinitionId);    
+    }
+
+}
+```
+
+Note, that for the code above, if you remove transaction boundaries by removing `@TransactionalAdvice`, the `startProcess()` method invocation will end up with an exception, because the transaction is required to access the database.        
 
 ## Compatibility Matrix
 
