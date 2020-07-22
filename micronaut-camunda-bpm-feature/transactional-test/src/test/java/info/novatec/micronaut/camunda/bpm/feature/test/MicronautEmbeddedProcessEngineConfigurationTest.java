@@ -1,5 +1,6 @@
 package info.novatec.micronaut.camunda.bpm.feature.test;
 
+import info.novatec.micronaut.camunda.bpm.feature.AbstractMicronautProcessEngineConfiguration;
 import info.novatec.micronaut.camunda.bpm.feature.MicronautEmbeddedProcessEngineConfiguration;
 import io.micronaut.test.annotation.MicronautTest;
 import org.camunda.bpm.engine.ProcessEngineException;
@@ -19,6 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MicronautEmbeddedProcessEngineConfigurationTest extends MicronautProcessEngineConfigurationTest {
 
 	@Inject protected TransactionalExecutor transactionalExecutor;
+
+	@Override @Test
+	void testDeploymentName() {
+		assertEquals(AbstractMicronautProcessEngineConfiguration.MICRONAUT_AUTO_DEPLOYMENT_NAME,
+			transactionalExecutor.doTransactionally(() -> repositoryService.createDeploymentQuery().singleResult().getName()));
+	}
+
 
 	@Override @Test
 	void testMicronautProcessEngineConfigurationClass() {
