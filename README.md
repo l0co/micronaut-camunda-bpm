@@ -150,9 +150,9 @@ public class MyProcessEngineConfigurationCustomizer implements ProcessEngineConf
 
 ## Transactions management support
 
-For the above configuration, with explicitely configured datasource details, the process engine built by this integration will use standalone datasource with Camunda-based transactions management, what means the separate database connection with transactions opened and closed on each call to the camunda service method.
+For the above configuration, with explicitely configured datasource details, the process engine built by this integration will use standalone datasource with Camunda-based transactions management, what means a separate database connection with transactions opened and closed on each call to a Camunda service method.
 
-However, it is possible to integrate both datasource and transactions management closer with [micronaut-sql](https://micronaut-projects.github.io/micronaut-sql/latest/guide) and built-in Micronaut transaction managers.
+However, it is possible to integrate both datasource and transactions management with [micronaut-sql](https://micronaut-projects.github.io/micronaut-sql/latest/guide) and built-in Micronaut transaction managers.
 
 To enable embedded transactions management support please add the following dependencies to your project:
 
