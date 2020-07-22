@@ -40,7 +40,7 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
         this.processEngineConfigurationCustomizer = processEngineConfigurationCustomizer;
     }
 
-    protected abstract void configurateProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration);
+    protected abstract void configureProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration);
 
     protected ProcessEngine buildProcessEngine(ProcessEngineConfigurationImpl processEngineConfiguration) throws IOException {
         ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
@@ -71,7 +71,7 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
             .setJobExecutorActivate(true)
             .setExpressionManager(new MicronautExpressionManager(new ApplicationContextElResolver(applicationContext)));
 
-        configurateProcessEngineConfiguration(processEngineConfiguration);
+        configureProcessEngineConfiguration(processEngineConfiguration);
         processEngineConfigurationCustomizer.customize(processEngineConfiguration);
         
         return buildProcessEngine(processEngineConfiguration);

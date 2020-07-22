@@ -25,7 +25,7 @@ public class MicronautStandaloneProcessEngineConfiguration extends AbstractMicro
 	}
 
 	@Override
-	protected void configurateProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration) {
+	protected void configureProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration) {
 		processEngineConfiguration
 			.setJdbcUrl(datasourceConfiguration.getUrl())
 			.setJdbcUsername(datasourceConfiguration.getUsername())

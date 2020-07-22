@@ -33,7 +33,7 @@ public class MicronautEmbeddedProcessEngineConfiguration extends AbstractMicrona
 	}
 
 	@Override
-	protected void configurateProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration) {
+	protected void configureProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration) {
 		processEngineConfiguration
 			.setDataSource(dataSource)
 			.setTransactionsExternallyManaged(true);
