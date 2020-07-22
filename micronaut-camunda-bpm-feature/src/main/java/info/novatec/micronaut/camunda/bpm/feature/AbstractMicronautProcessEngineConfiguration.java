@@ -2,7 +2,7 @@ package info.novatec.micronaut.camunda.bpm.feature;
 
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.annotation.Context;
-import org.camunda.bpm.engine.*;
+import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.camunda.bpm.engine.impl.history.HistoryLevel;
@@ -99,126 +99,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
                         .deploy();
             }
         }
-    }
-
-    /**
-     * Creates a bean for the {@link RuntimeService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link RuntimeService}
-     */
-    public RuntimeService runtimeService(ProcessEngine processEngine) {
-        return processEngine.getRuntimeService();
-    }
-
-    /**
-     * Creates a bean for the {@link RepositoryService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link RepositoryService}
-     */
-    public RepositoryService repositoryService(ProcessEngine processEngine) {
-        return processEngine.getRepositoryService();
-    }
-
-    /**
-     * Creates a bean for the {@link ManagementService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link ManagementService}
-     */
-    public ManagementService managementService(ProcessEngine processEngine) {
-        return processEngine.getManagementService();
-    }
-
-    /**
-     * Creates a bean for the {@link AuthorizationService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link AuthorizationService}
-     */
-    public AuthorizationService authorizationService(ProcessEngine processEngine) {
-        return processEngine.getAuthorizationService();
-    }
-
-    /**
-     * Creates a bean for the {@link CaseService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link CaseService}
-     */
-    public CaseService caseService(ProcessEngine processEngine) {
-        return processEngine.getCaseService();
-    }
-
-    /**
-     * Creates a bean for the {@link DecisionService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link DecisionService}
-     */
-    public DecisionService decisionService(ProcessEngine processEngine) {
-        return processEngine.getDecisionService();
-    }
-
-    /**
-     * Creates a bean for the {@link ExternalTaskService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link ExternalTaskService}
-     */
-    public ExternalTaskService externalTaskService(ProcessEngine processEngine) {
-        return processEngine.getExternalTaskService();
-    }
-
-    /**
-     * Creates a bean for the {@link FilterService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link FilterService}
-     */
-    public FilterService filterService(ProcessEngine processEngine) {
-        return processEngine.getFilterService();
-    }
-
-    /**
-     * Creates a bean for the {@link FormService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link FormService}
-     */
-    public FormService formService(ProcessEngine processEngine) {
-        return processEngine.getFormService();
-    }
-
-    /**
-     * Creates a bean for the {@link TaskService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link TaskService}
-     */
-    public TaskService taskService(ProcessEngine processEngine) {
-        return processEngine.getTaskService();
-    }
-
-    /**
-     * Creates a bean for the {@link HistoryService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link HistoryService}
-     */
-    public HistoryService historyService(ProcessEngine processEngine) {
-        return processEngine.getHistoryService();
-    }
-
-    /**
-     * Creates a bean for the {@link IdentityService} in the application context which can be injected if needed.
-     *
-     * @param processEngine the {@link ProcessEngine}
-     * @return the {@link IdentityService}
-     */
-    public IdentityService identityService(ProcessEngine processEngine) {
-        return processEngine.getIdentityService();
     }
 
 }

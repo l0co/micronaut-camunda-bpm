@@ -30,3 +30,4 @@ build
 
 # IntelliJ IDEA
 /.idea/
+.run
