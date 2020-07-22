@@ -1,0 +1,12 @@
+datasources:
+  default:
+    url: jdbc:h2:mem:micronaut-db;DB_CLOSE_DELAY=1000
+    username: sa
+    password: ""
+    driverClassName: org.h2.Driver
+
+jpa:
+  default:
+    entity-scan:
+      packages:
+        - info.novatec.micronaut.camunda.bpm.feature.test
