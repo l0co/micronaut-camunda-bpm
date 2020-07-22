@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Lukasz Frankowski
  */
 @MicronautTest
-public class MicronautProcessEngineTransactionalConfigurationTest extends MicronautProcessEngineConfigurationTest {
+public class MicronautEmbeddedProcessEngineConfigurationTest extends MicronautProcessEngineConfigurationTest {
 
 	@Override @Test
 	void testMicronautProcessEngineConfigurationClass() {

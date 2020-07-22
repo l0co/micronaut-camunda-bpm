@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -108,7 +107,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link RuntimeService}
      */
-    @Singleton
     public RuntimeService runtimeService(ProcessEngine processEngine) {
         return processEngine.getRuntimeService();
     }
@@ -119,7 +117,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link RepositoryService}
      */
-    @Singleton
     public RepositoryService repositoryService(ProcessEngine processEngine) {
         return processEngine.getRepositoryService();
     }
@@ -130,7 +127,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link ManagementService}
      */
-    @Singleton
     public ManagementService managementService(ProcessEngine processEngine) {
         return processEngine.getManagementService();
     }
@@ -141,7 +137,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link AuthorizationService}
      */
-    @Singleton
     public AuthorizationService authorizationService(ProcessEngine processEngine) {
         return processEngine.getAuthorizationService();
     }
@@ -152,7 +147,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link CaseService}
      */
-    @Singleton
     public CaseService caseService(ProcessEngine processEngine) {
         return processEngine.getCaseService();
     }
@@ -163,7 +157,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link DecisionService}
      */
-    @Singleton
     public DecisionService decisionService(ProcessEngine processEngine) {
         return processEngine.getDecisionService();
     }
@@ -174,7 +167,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link ExternalTaskService}
      */
-    @Singleton
     public ExternalTaskService externalTaskService(ProcessEngine processEngine) {
         return processEngine.getExternalTaskService();
     }
@@ -185,7 +177,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link FilterService}
      */
-    @Singleton
     public FilterService filterService(ProcessEngine processEngine) {
         return processEngine.getFilterService();
     }
@@ -196,7 +187,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link FormService}
      */
-    @Singleton
     public FormService formService(ProcessEngine processEngine) {
         return processEngine.getFormService();
     }
@@ -207,7 +197,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link TaskService}
      */
-    @Singleton
     public TaskService taskService(ProcessEngine processEngine) {
         return processEngine.getTaskService();
     }
@@ -218,7 +207,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link HistoryService}
      */
-    @Singleton
     public HistoryService historyService(ProcessEngine processEngine) {
         return processEngine.getHistoryService();
     }
@@ -229,7 +217,6 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
      * @param processEngine the {@link ProcessEngine}
      * @return the {@link IdentityService}
      */
-    @Singleton
     public IdentityService identityService(ProcessEngine processEngine) {
         return processEngine.getIdentityService();
     }
