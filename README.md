@@ -170,12 +170,12 @@ implementation("io.micronaut.sql:micronaut-hibernate-jpa")
 runtime("io.micronaut.sql:micronaut-jdbc-hikari")
 ```
 
-And then JPA configuration as desrcibed in [micronaut-sql documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/#hibernate).
+And with JPA configuration as described in [micronaut-sql documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/#hibernate).
 
-With such a configuration transactions management will be accomplished by Micronaut container, not by Camunda, and to work with Camunda beans `@TransactionalAdvice` is required, which sets up transaction boundaries. For example:
+With such a configuration transactions management will be accomplished by Micronaut container, not by Camunda, and to work with Camunda beans the `@TransactionalAdvice` annotation is required, which sets up transaction boundaries. For example:
 
 ```java
-class MyBean {
+@Singleton class MyBean {
 
     @Inject RuntimeService runtimeService;
 
@@ -187,7 +187,7 @@ class MyBean {
 }
 ```
 
-Note, that for the code above, if you remove transaction boundaries by removing `@TransactionalAdvice`, the `startProcess()` method invocation will end up with an exception, because the transaction is required to access the database.        
+Note, that for the code above, if you remove transaction boundaries by removing the `@TransactionalAdvice` annotation, the `startProcess()` method invocation will end up with an exception, because the transaction is required to get access to the database.        
 
 ## Compatibility Matrix
 
