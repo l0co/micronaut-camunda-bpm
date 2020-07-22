@@ -1,6 +1,7 @@
 package info.novatec.micronaut.camunda.bpm.feature.test;
 
-import info.novatec.micronaut.camunda.bpm.feature.MicronautProcessEngineConfiguration;
+import info.novatec.micronaut.camunda.bpm.feature.AbstractMicronautProcessEngineConfiguration;
+import info.novatec.micronaut.camunda.bpm.feature.MicronautStandaloneProcessEngineConfiguration;
 import io.micronaut.test.annotation.MicronautTest;
 import org.camunda.bpm.engine.*;
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,14 @@ class MicronautProcessEngineConfigurationTest {
     @Inject
     IdentityService identityService;
 
+    @Inject
+    AbstractMicronautProcessEngineConfiguration micronautProcessEngineConfiguration;
+
+    @Test
+    void testMicronautProcessEngineConfigurationClass() {
+        assertEquals(MicronautStandaloneProcessEngineConfiguration.class, micronautProcessEngineConfiguration.getClass());;
+    }
+
     @Test
     void allBeansAreAvailableInApplicationContext() {
         assertNotNull(processEngine);
@@ -70,7 +79,7 @@ class MicronautProcessEngineConfigurationTest {
 
     @Test
     void testDeploymentName() {
-        assertEquals(MicronautProcessEngineConfiguration.MICRONAUT_AUTO_DEPLOYMENT_NAME, repositoryService.createDeploymentQuery().singleResult().getName());
+        assertEquals(AbstractMicronautProcessEngineConfiguration.MICRONAUT_AUTO_DEPLOYMENT_NAME, repositoryService.createDeploymentQuery().singleResult().getName());
     }
 
     @Test

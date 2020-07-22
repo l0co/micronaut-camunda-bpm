@@ -2,7 +2,6 @@ package info.novatec.micronaut.camunda.bpm.feature;
 
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.annotation.Context;
-import io.micronaut.context.annotation.Factory;
 import org.camunda.bpm.engine.*;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration;
@@ -19,28 +18,38 @@ import java.util.Arrays;
 /**
  * @author Tobias Schäfer
  */
-@Factory
-public class MicronautProcessEngineConfiguration {
+public abstract class AbstractMicronautProcessEngineConfiguration {
 
     public static final String MICRONAUT_AUTO_DEPLOYMENT_NAME = "MicronautAutoDeployment";
 
-    private static final Logger log = LoggerFactory.getLogger(MicronautProcessEngineConfiguration.class);
+    protected static final Logger log = LoggerFactory.getLogger(AbstractMicronautProcessEngineConfiguration.class);
 
-    private final ApplicationContext applicationContext;
+    protected final ApplicationContext applicationContext;
 
-    private final Configuration configuration;
+    protected final Configuration configuration;
 
-    private final DatasourceConfiguration datasourceConfiguration;
+    protected final DatasourceConfiguration datasourceConfiguration;
 
-    private final ProcessEngineConfigurationCustomizer processEngineConfigurationCustomizer;
+    protected final ProcessEngineConfigurationCustomizer processEngineConfigurationCustomizer;
 
-    public MicronautProcessEngineConfiguration(ApplicationContext applicationContext, Configuration configuration,
-                                               DatasourceConfiguration datasourceConfiguration,
-                                               ProcessEngineConfigurationCustomizer processEngineConfigurationCustomizer) {
+    public AbstractMicronautProcessEngineConfiguration(ApplicationContext applicationContext, Configuration configuration,
+                                                       DatasourceConfiguration datasourceConfiguration,
+                                                       ProcessEngineConfigurationCustomizer processEngineConfigurationCustomizer) {
         this.applicationContext = applicationContext;
         this.configuration = configuration;
         this.datasourceConfiguration = datasourceConfiguration;
         this.processEngineConfigurationCustomizer = processEngineConfigurationCustomizer;
+    }
+
+    protected abstract void configurateProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration);
+
+    protected ProcessEngine buildProcessEngine(ProcessEngineConfigurationImpl processEngineConfiguration) throws IOException {
+        ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
+        log.info("Successfully created process engine which is connected to database {}", datasourceConfiguration.getUrl());
+
+        deployProcessModels(processEngine);
+
+        return processEngine;
     }
 
     /**
@@ -58,23 +67,14 @@ public class MicronautProcessEngineConfiguration {
                 return HistoryLevel.HISTORY_LEVEL_FULL;
             }
         }
-                .setDatabaseSchemaUpdate(configuration.getDatabase().getSchemaUpdate())
-                .setJdbcUrl(datasourceConfiguration.getUrl())
-                .setJdbcUsername(datasourceConfiguration.getUsername())
-                .setJdbcPassword(datasourceConfiguration.getPassword())
-                .setJdbcDriver(datasourceConfiguration.getDriverClassName())
                 .setHistory(configuration.getHistoryLevel())
                 .setJobExecutorActivate(true)
                 .setExpressionManager(new MicronautExpressionManager(new ApplicationContextElResolver(applicationContext)));
 
+        configurateProcessEngineConfiguration(processEngineConfiguration);
         processEngineConfigurationCustomizer.customize(processEngineConfiguration);
-
-        ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
-        log.info("Successfully created process engine which is connected to database {}", datasourceConfiguration.getUrl());
-
-        deployProcessModels(processEngine);
-
-        return processEngine;
+        
+        return buildProcessEngine(processEngineConfiguration);
     }
 
     /**
