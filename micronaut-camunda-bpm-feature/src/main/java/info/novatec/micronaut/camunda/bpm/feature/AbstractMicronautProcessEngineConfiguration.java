@@ -67,9 +67,10 @@ public abstract class AbstractMicronautProcessEngineConfiguration {
                 return HistoryLevel.HISTORY_LEVEL_FULL;
             }
         }
-                .setHistory(configuration.getHistoryLevel())
-                .setJobExecutorActivate(true)
-                .setExpressionManager(new MicronautExpressionManager(new ApplicationContextElResolver(applicationContext)));
+            .setDatabaseSchemaUpdate(configuration.getDatabase().getSchemaUpdate())
+            .setHistory(configuration.getHistoryLevel())
+            .setJobExecutorActivate(true)
+            .setExpressionManager(new MicronautExpressionManager(new ApplicationContextElResolver(applicationContext)));
 
         configurateProcessEngineConfiguration(processEngineConfiguration);
         processEngineConfigurationCustomizer.customize(processEngineConfiguration);

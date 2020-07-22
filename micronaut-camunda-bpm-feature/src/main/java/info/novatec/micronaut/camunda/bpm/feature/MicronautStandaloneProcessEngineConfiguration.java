@@ -2,6 +2,8 @@ package info.novatec.micronaut.camunda.bpm.feature;
 
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.annotation.Factory;
+import io.micronaut.context.annotation.Requires;
+import io.micronaut.transaction.SynchronousTransactionManager;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 
 /**
@@ -9,7 +11,7 @@ import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
  *
  * @author Lukasz Frankowski
  */
-@Factory
+@Factory @Requires(missingBeans = SynchronousTransactionManager.class)
 public class MicronautStandaloneProcessEngineConfiguration extends AbstractMicronautProcessEngineConfiguration {
 
 	public MicronautStandaloneProcessEngineConfiguration(ApplicationContext applicationContext, Configuration configuration,
@@ -21,7 +23,6 @@ public class MicronautStandaloneProcessEngineConfiguration extends AbstractMicro
 	@Override
 	protected void configurateProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration) {
 		processEngineConfiguration
-			.setDatabaseSchemaUpdate(configuration.getDatabase().getSchemaUpdate())
 			.setJdbcUrl(datasourceConfiguration.getUrl())
 			.setJdbcUsername(datasourceConfiguration.getUsername())
 			.setJdbcPassword(datasourceConfiguration.getPassword())
